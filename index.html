@@ -97,10 +97,16 @@ tailwind.config = {
       </div>
       <span class="ml-2 text-xs bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full">AI健康档案助手</span>
     </div>
-    <button onclick="openNewPetModal()" class="bg-orange-500 hover:bg-orange-600 text-white text-sm px-4 py-2 rounded-lg flex items-center gap-1.5 transition-colors">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-      新建宠物档案
-    </button>
+    <div class="flex items-center gap-2">
+      <button onclick="openSettingsModal()" class="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors relative" title="API设置" id="settingsBtn">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span id="keyStatusDot" class="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-400 hidden"></span>
+      </button>
+      <button onclick="openNewPetModal()" class="bg-orange-500 hover:bg-orange-600 text-white text-sm px-4 py-2 rounded-lg flex items-center gap-1.5 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        新建宠物档案
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -125,9 +131,15 @@ tailwind.config = {
             <div class="text-sm opacity-80 mt-0.5" id="petAge">3岁 · 约2kg</div>
           </div>
         </div>
-        <div class="mt-3 text-xs opacity-80 flex items-center gap-1">
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          <span id="petLocation">深圳-西安-成都（当前）</span>
+        <div class="mt-3 flex items-center justify-between">
+          <div class="text-xs opacity-80 flex items-center gap-1">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span id="petLocation">深圳-西安-成都（当前）</span>
+          </div>
+          <button onclick="openEditPetModal()" class="text-xs text-white/80 hover:text-white border border-white/30 hover:border-white/60 rounded-lg px-2 py-1 transition-colors flex items-center gap-1">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            编辑档案
+          </button>
         </div>
       </div>
       <!-- Breed Risk -->
@@ -321,7 +333,7 @@ tailwind.config = {
   <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl flex flex-col" style="max-height:95vh">
     <!-- Header -->
     <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between flex-shrink-0">
-      <h2 class="font-bold text-gray-800 flex items-center gap-2"><span>🐾</span> 新建宠物档案</h2>
+      <h2 id="petModalTitle" class="font-bold text-gray-800 flex items-center gap-2"><span>🐾</span> 新建宠物档案</h2>
       <button onclick="closeNewPetModal()" class="text-gray-400 hover:text-gray-600">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
@@ -427,15 +439,92 @@ tailwind.config = {
     <!-- Footer -->
     <div class="px-6 py-4 border-t border-gray-100 flex gap-3 flex-shrink-0">
       <button onclick="closeNewPetModal()" class="flex-1 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-600 hover:bg-gray-50 transition-colors">取消</button>
-      <button onclick="createNewPet()" class="flex-1 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors">创建档案</button>
+      <button onclick="savePetForm()" id="petModalSaveBtn" class="flex-1 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors">创建档案</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div id="settingsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm">
+    <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+      <h2 class="font-bold text-gray-800 flex items-center gap-2">⚙️ API 设置</h2>
+      <button onclick="closeSettingsModal()" class="text-gray-400 hover:text-gray-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="p-6 space-y-4">
+      <div>
+        <div class="text-xs font-medium text-gray-600 mb-1">当前状态</div>
+        <div id="keyStatusBadge" class="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full font-medium">
+          <span id="keyStatusDot2" class="w-2 h-2 rounded-full"></span>
+          <span id="keyStatusText">检查中…</span>
+        </div>
+      </div>
+      <div>
+        <label class="text-xs font-medium text-gray-600 mb-1 block">Groq API Key</label>
+        <input id="settingsKeyInput" type="password" placeholder="gsk_..." autocomplete="off"
+          class="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100">
+        <div class="text-xs text-gray-400 mt-1.5">前往 <span class="text-orange-500">console.groq.com/keys</span> 获取免费 Key</div>
+      </div>
+      <div class="flex gap-2 pt-1">
+        <button onclick="clearApiKey()" class="flex-shrink-0 px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-500 hover:bg-gray-50 transition-colors">清除</button>
+        <button onclick="saveApiKey()" class="flex-1 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors">保存</button>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-const API_KEY = "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";
 const API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const MODEL = "meta-llama/llama-4-scout-17b-16e-instruct";
+const LS_KEY = 'pawhealth_groq_key';
+
+function getApiKey() { return localStorage.getItem(LS_KEY) || ''; }
+
+function updateKeyStatusUI() {
+  const has = !!getApiKey();
+  // nav dot
+  const dot = document.getElementById('keyStatusDot');
+  if (dot) { dot.classList.toggle('hidden', has); }
+  // settings modal badge
+  const badge = document.getElementById('keyStatusBadge');
+  const dot2  = document.getElementById('keyStatusDot2');
+  const text  = document.getElementById('keyStatusText');
+  if (badge && dot2 && text) {
+    if (has) {
+      badge.className = 'inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full font-medium bg-green-50 text-green-700';
+      dot2.className  = 'w-2 h-2 rounded-full bg-green-500';
+      text.textContent = '已设置 ✓';
+    } else {
+      badge.className = 'inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full font-medium bg-red-50 text-red-600';
+      dot2.className  = 'w-2 h-2 rounded-full bg-red-400';
+      text.textContent = '未设置';
+    }
+  }
+}
+
+function openSettingsModal() {
+  const key = getApiKey();
+  document.getElementById('settingsKeyInput').value = key ? '••••••••' + key.slice(-4) : '';
+  updateKeyStatusUI();
+  document.getElementById('settingsModal').classList.remove('hidden');
+}
+function closeSettingsModal() {
+  document.getElementById('settingsModal').classList.add('hidden');
+}
+function saveApiKey() {
+  const val = document.getElementById('settingsKeyInput').value.trim();
+  if (!val || val.startsWith('••')) { closeSettingsModal(); return; }
+  localStorage.setItem(LS_KEY, val);
+  updateKeyStatusUI();
+  closeSettingsModal();
+}
+function clearApiKey() {
+  localStorage.removeItem(LS_KEY);
+  document.getElementById('settingsKeyInput').value = '';
+  updateKeyStatusUI();
+}
 
 // ─── Breed list ───────────────────────────────────────────
 const CAT_BREEDS = ['英国短毛猫','布偶猫','金渐层','暹罗猫','中华田园猫','缅因猫','波斯猫','美国短毛猫','苏格兰折耳猫','孟加拉猫','挪威森林猫','阿比西尼亚猫','斯芬克斯猫'];
@@ -603,6 +692,12 @@ ${notesText}
 }
 
 async function sendMessage() {
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    appendMessage('assistant', '⚙️ 请先点击右上角 ⚙️ 图标填入 Groq API Key，才能开始对话。');
+    return;
+  }
+
   const input = document.getElementById('messageInput');
   const text = input.value.trim();
 
@@ -664,7 +759,7 @@ async function sendMessage() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`
+        'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify(requestBody)
     });
@@ -1012,81 +1107,11 @@ function handleAvatarUpload(event) {
 // ─── Dynamic form rows ────────────────────────────────────────
 let rowCounters = { med: 0, history: 0, visit: 0, allergy: 0 };
 
-function addMedRow() {
-  const id = 'med-' + (++rowCounters.med);
-  const html = `
-    <div class="structured-row" id="${id}">
-      <button class="remove-row-btn" onclick="removeRow('${id}')">✕</button>
-      <div class="grid grid-cols-2 gap-2 mb-2">
-        <input class="field-input" placeholder="药品名称 *" data-field="name">
-        <input class="field-input" placeholder="用药目的/症状" data-field="purpose">
-      </div>
-      <div class="grid grid-cols-3 gap-2">
-        <select class="field-select" data-field="frequency">
-          <option value="">频次</option>
-          <option>每日一次</option><option>每日两次</option><option>每日三次</option>
-          <option>随餐服用</option><option>隔日一次</option><option>按需服用</option>
-        </select>
-        <input class="field-input" placeholder="日费用（元，选填）" data-field="dailyCost">
-        <select class="field-select" data-field="source">
-          <option value="">药物来源</option>
-          <option>国内购买</option><option>代购</option><option>医院处方</option><option>其他</option>
-        </select>
-      </div>
-    </div>`;
-  document.getElementById('formMedRows').insertAdjacentHTML('beforeend', html);
-}
+function addMedRow() { addMedRowWithData(); }
 
-function addHistoryRow() {
-  const id = 'history-' + (++rowCounters.history);
-  const html = `
-    <div class="structured-row" id="${id}">
-      <button class="remove-row-btn" onclick="removeRow('${id}')">✕</button>
-      <div class="grid grid-cols-2 gap-2 mb-2">
-        <input class="field-input" placeholder="病名/诊断 *" data-field="disease">
-        <input class="field-input" placeholder="初次发病时间（如：2023年3月）" data-field="onset">
-      </div>
-      <div class="grid grid-cols-2 gap-2 mb-2">
-        <select class="field-select" data-field="status">
-          <option value="">是否已治愈</option>
-          <option>已治愈</option><option>持续中</option><option>否</option>
-        </select>
-        <input class="field-input" placeholder="病情描述（选填）" data-field="desc">
-      </div>
-    </div>`;
-  document.getElementById('formHistoryRows').insertAdjacentHTML('beforeend', html);
-}
-
-function addVisitRow() {
-  const id = 'visit-' + (++rowCounters.visit);
-  const html = `
-    <div class="structured-row" id="${id}">
-      <button class="remove-row-btn" onclick="removeRow('${id}')">✕</button>
-      <div class="grid grid-cols-2 gap-2 mb-2">
-        <input class="field-input" type="date" data-field="date">
-        <input class="field-input" placeholder="就诊医院" data-field="hospital">
-      </div>
-      <div class="grid grid-cols-2 gap-2 mb-2">
-        <input class="field-input" placeholder="诊断结果" data-field="diagnosis">
-        <input class="field-input" placeholder="处方/用药" data-field="prescription">
-      </div>
-      <input class="field-input" placeholder="就诊费用（元，选填）" data-field="cost" style="width:50%">
-    </div>`;
-  document.getElementById('formVisitRows').insertAdjacentHTML('beforeend', html);
-}
-
-function addAllergyRow() {
-  const id = 'allergy-' + (++rowCounters.allergy);
-  const html = `
-    <div class="structured-row" id="${id}">
-      <button class="remove-row-btn" onclick="removeRow('${id}')">✕</button>
-      <div class="grid grid-cols-2 gap-2">
-        <input class="field-input" placeholder="过敏原（如：鸡肉、花粉）" data-field="allergen">
-        <input class="field-input" placeholder="过敏反应描述" data-field="reaction">
-      </div>
-    </div>`;
-  document.getElementById('formAllergyRows').insertAdjacentHTML('beforeend', html);
-}
+function addHistoryRow() { addHistoryRowWithData(); }
+function addVisitRow()   { addVisitRowWithData(); }
+function addAllergyRow() { addAllergyRowWithData(); }
 
 function removeRow(id) {
   document.getElementById(id)?.remove();
@@ -1103,8 +1128,11 @@ function collectRows(containerId, fields) {
   }).filter(obj => Object.values(obj).some(v => v));
 }
 
-// ─── New pet modal ────────────────────────────────────────────
-function openNewPetModal() {
+// ─── Pet modal (shared for create & edit) ──────────────────────
+let petModalMode = 'create';
+let editingPetId = null;
+
+function resetPetForm() {
   newAvatarData = null;
   rowCounters = { med: 0, history: 0, visit: 0, allergy: 0 };
   ['formMedRows','formHistoryRows','formVisitRows','formAllergyRows'].forEach(id => {
@@ -1114,9 +1142,133 @@ function openNewPetModal() {
     document.getElementById(id).value = '';
   });
   document.getElementById('newGender').selectedIndex = 0;
-  const preview = document.getElementById('newAvatarPreview');
-  if (preview) preview.textContent = '🐾';
   document.getElementById('newAvatarInput').value = '';
+  const wrap = document.getElementById('newAvatarPreview');
+  if (wrap) {
+    if (wrap.tagName === 'IMG') {
+      wrap.outerHTML = '<div id="newAvatarPreview" class="avatar-placeholder bg-orange-100">🐾</div>';
+    } else { wrap.textContent = '🐾'; }
+  }
+}
+
+function addMedRowWithData(data = {}) {
+  const id = 'med-' + (++rowCounters.med);
+  const freqOpts = ['每日一次','每日两次','每日三次','随餐服用','隔日一次','按需服用'];
+  const srcOpts  = ['国内购买','代购','医院处方','其他'];
+  const html = `
+    <div class="structured-row" id="${id}">
+      <button class="remove-row-btn" onclick="removeRow('${id}')">✕</button>
+      <div class="grid grid-cols-2 gap-2 mb-2">
+        <input class="field-input" placeholder="药品名称 *" data-field="name" value="${data.name||''}">
+        <input class="field-input" placeholder="用药目的/症状" data-field="purpose" value="${data.purpose||''}">
+      </div>
+      <div class="grid grid-cols-3 gap-2">
+        <select class="field-select" data-field="frequency">
+          <option value="">频次</option>
+          ${freqOpts.map(o=>`<option${data.frequency===o?' selected':''}>${o}</option>`).join('')}
+        </select>
+        <input class="field-input" placeholder="日费用（元，选填）" data-field="dailyCost" value="${data.dailyCost||''}">
+        <select class="field-select" data-field="source">
+          <option value="">药物来源</option>
+          ${srcOpts.map(o=>`<option${data.source===o?' selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+    </div>`;
+  document.getElementById('formMedRows').insertAdjacentHTML('beforeend', html);
+}
+
+function addHistoryRowWithData(data = {}) {
+  const id = 'history-' + (++rowCounters.history);
+  const statusOpts = ['已治愈','持续中','否'];
+  const html = `
+    <div class="structured-row" id="${id}">
+      <button class="remove-row-btn" onclick="removeRow('${id}')">✕</button>
+      <div class="grid grid-cols-2 gap-2 mb-2">
+        <input class="field-input" placeholder="病名/诊断 *" data-field="disease" value="${data.disease||''}">
+        <input class="field-input" placeholder="初次发病时间" data-field="onset" value="${data.onset||''}">
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <select class="field-select" data-field="status">
+          <option value="">是否已治愈</option>
+          ${statusOpts.map(o=>`<option${data.status===o?' selected':''}>${o}</option>`).join('')}
+        </select>
+        <input class="field-input" placeholder="病情描述（选填）" data-field="desc" value="${data.desc||''}">
+      </div>
+    </div>`;
+  document.getElementById('formHistoryRows').insertAdjacentHTML('beforeend', html);
+}
+
+function addVisitRowWithData(data = {}) {
+  const id = 'visit-' + (++rowCounters.visit);
+  const html = `
+    <div class="structured-row" id="${id}">
+      <button class="remove-row-btn" onclick="removeRow('${id}')">✕</button>
+      <div class="grid grid-cols-2 gap-2 mb-2">
+        <input class="field-input" type="date" data-field="date" value="${data.date||''}">
+        <input class="field-input" placeholder="就诊医院" data-field="hospital" value="${data.hospital||''}">
+      </div>
+      <div class="grid grid-cols-2 gap-2 mb-2">
+        <input class="field-input" placeholder="诊断结果" data-field="diagnosis" value="${data.diagnosis||''}">
+        <input class="field-input" placeholder="处方/用药" data-field="prescription" value="${data.prescription||''}">
+      </div>
+      <input class="field-input" placeholder="就诊费用（元，选填）" data-field="cost" value="${data.cost||''}" style="width:50%">
+    </div>`;
+  document.getElementById('formVisitRows').insertAdjacentHTML('beforeend', html);
+}
+
+function addAllergyRowWithData(data = {}) {
+  const id = 'allergy-' + (++rowCounters.allergy);
+  const html = `
+    <div class="structured-row" id="${id}">
+      <button class="remove-row-btn" onclick="removeRow('${id}')">✕</button>
+      <div class="grid grid-cols-2 gap-2">
+        <input class="field-input" placeholder="过敏原" data-field="allergen" value="${data.allergen||''}">
+        <input class="field-input" placeholder="过敏反应描述" data-field="reaction" value="${data.reaction||''}">
+      </div>
+    </div>`;
+  document.getElementById('formAllergyRows').insertAdjacentHTML('beforeend', html);
+}
+
+function openNewPetModal() {
+  petModalMode = 'create';
+  editingPetId = null;
+  resetPetForm();
+  document.getElementById('petModalTitle').innerHTML = '<span>🐾</span> 新建宠物档案';
+  document.getElementById('petModalSaveBtn').textContent = '创建档案';
+  document.getElementById('newPetModal').classList.remove('hidden');
+}
+
+function openEditPetModal() {
+  const pet = getCurrentPet();
+  petModalMode = 'edit';
+  editingPetId = pet.id;
+  resetPetForm();
+
+  document.getElementById('newName').value     = pet.name || '';
+  document.getElementById('newBreed').value    = pet.breed || '';
+  document.getElementById('newAge').value      = pet.age || '';
+  document.getElementById('newWeight').value   = pet.weight || '';
+  document.getElementById('newLocation').value = pet.location || '';
+  document.getElementById('newNotes').value    = pet.notes || '';
+  const gEl = document.getElementById('newGender');
+  Array.from(gEl.options).forEach((o,i) => { if (o.value === pet.gender) gEl.selectedIndex = i; });
+
+  if (pet.avatar) {
+    newAvatarData = pet.avatar;
+    const wrap = document.getElementById('newAvatarPreview');
+    if (wrap) wrap.outerHTML = `<img id="newAvatarPreview" src="${pet.avatar}" class="avatar-placeholder" style="object-fit:cover;border-radius:50%;">`;
+  } else {
+    const wrap = document.getElementById('newAvatarPreview');
+    if (wrap && wrap.tagName !== 'IMG') wrap.textContent = pet.emoji || getEmojiForBreed(pet.breed);
+  }
+
+  (pet.medications    || []).forEach(m => addMedRowWithData(m));
+  (pet.diseaseHistory || []).forEach(h => addHistoryRowWithData(h));
+  (pet.medicalVisits  || []).forEach(v => addVisitRowWithData(v));
+  (pet.allergies      || []).forEach(a => addAllergyRowWithData(a));
+
+  document.getElementById('petModalTitle').innerHTML = '<span>✏️</span> 编辑宠物档案';
+  document.getElementById('petModalSaveBtn').textContent = '保存修改';
   document.getElementById('newPetModal').classList.remove('hidden');
 }
 
@@ -1124,8 +1276,8 @@ function closeNewPetModal() {
   document.getElementById('newPetModal').classList.add('hidden');
 }
 
-function createNewPet() {
-  const name = document.getElementById('newName').value.trim();
+function savePetForm() {
+  const name  = document.getElementById('newName').value.trim();
   const breed = document.getElementById('newBreed').value.trim();
   if (!name || !breed) { alert('请填写宠物姓名和品种'); return; }
 
@@ -1135,39 +1287,45 @@ function createNewPet() {
   const location = document.getElementById('newLocation').value.trim() || '未填写';
   const notes    = document.getElementById('newNotes').value.trim();
 
-  const medications   = collectRows('formMedRows',    ['name','purpose','frequency','dailyCost','source']);
-  const diseaseHistory= collectRows('formHistoryRows', ['disease','onset','status','desc']);
-  const medicalVisits = collectRows('formVisitRows',   ['date','hospital','diagnosis','prescription','cost']);
-  const allergies     = collectRows('formAllergyRows', ['allergen','reaction']);
+  const medications    = collectRows('formMedRows',    ['name','purpose','frequency','dailyCost','source']);
+  const diseaseHistory = collectRows('formHistoryRows', ['disease','onset','status','desc']);
+  const medicalVisits  = collectRows('formVisitRows',   ['date','hospital','diagnosis','prescription','cost']);
+  const allergies      = collectRows('formAllergyRows', ['allergen','reaction']);
 
   const timeline = diseaseHistory.length
     ? diseaseHistory.map(h => ({ time: h.onset || '历史', desc: `${h.disease}（${h.status || ''}）` }))
-    : [{ time: '今日', desc: '建立健康档案' }];
+    : [{ time: petModalMode === 'edit' ? '更新' : '今日', desc: petModalMode === 'edit' ? '档案已更新' : '建立健康档案' }];
 
-  const id = 'pet-' + Date.now();
+  const processedMeds = medications.map(m => ({ ...m, note: [m.purpose, m.frequency, m.source].filter(Boolean).join(' · ') }));
 
-  pets.push({
-    id, name, breed, gender, age, weight, location,
-    emoji: getEmojiForBreed(breed),
-    avatar: newAvatarData,
-    medStatus: '',
-    medications: medications.map(m => ({ ...m, note: [m.purpose, m.frequency, m.source].filter(Boolean).join(' · ') })),
-    medWarning: '',
-    diseaseHistory,
-    timeline,
-    medicalVisits,
-    allergies,
-    notes,
-    breedRisks: [],
-    history: [],
-    images: [],
-  });
-
-  closeNewPetModal();
-  switchPet(id);
+  if (petModalMode === 'edit') {
+    const pet = pets.find(p => p.id === editingPetId);
+    if (pet) {
+      Object.assign(pet, { name, breed, gender, age, weight, location, notes,
+        emoji: pet.avatar ? pet.emoji : getEmojiForBreed(breed),
+        medications: processedMeds, diseaseHistory, medicalVisits, allergies, timeline,
+      });
+      if (newAvatarData) pet.avatar = newAvatarData;
+    }
+    closeNewPetModal();
+    renderTabs();
+    renderLeftPanel();
+  } else {
+    const id = 'pet-' + Date.now();
+    pets.push({
+      id, name, breed, gender, age, weight, location,
+      emoji: getEmojiForBreed(breed), avatar: newAvatarData,
+      medStatus: '', medWarning: '',
+      medications: processedMeds, diseaseHistory, medicalVisits, allergies, timeline, notes,
+      breedRisks: [], history: [], images: [],
+    });
+    closeNewPetModal();
+    switchPet(id);
+  }
 }
 
 // Init
+updateKeyStatusUI();
 renderTabs();
 </script>
 </body>
